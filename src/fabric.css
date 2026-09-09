@@ -1,0 +1,243 @@
+/* ============================================================
+   HYPER-FABRIC DIGITAL WEAVE — Living Digital Loom Stylesheet
+   Obsidian indigo base + Electric Orchid + Cyber Cyan + Golden Silk
+============================================================ */
+
+:root {
+  --loom-void: #060812;
+  --loom-deep: #0b0f1d;
+  --loom-mesh: #11172b;
+  --panel-fabric: rgba(14, 20, 38, 0.76);
+  --panel-glass: rgba(18, 26, 48, 0.65);
+  
+  /* Luminous Filament Threads */
+  --thread-orchid: #b388ff;
+  --thread-cyan: #00f0ff;
+  --thread-gold: #ffd740;
+  --thread-emerald: #00e676;
+  --thread-rose: #ff4081;
+  
+  --fabric-ink: #f0f4ff;
+  --fabric-muted: #8c9bbd;
+  --fabric-faint: #4e5d80;
+  --stitch-line: rgba(179, 136, 255, 0.2);
+  --stitch-cyan: rgba(0, 240, 255, 0.22);
+  --stitch-gold: rgba(255, 215, 64, 0.2);
+}
+
+html {
+  background: var(--loom-void);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--loom-void);
+  color: var(--fabric-ink);
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(179, 136, 255, 0.35);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--loom-void);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--thread-orchid), var(--thread-cyan));
+  border-radius: 99px;
+  border: 2px solid var(--loom-void);
+}
+
+/* Typography classes */
+.f-syne { font-family: "Syne", sans-serif; }
+.f-mono { font-family: "Space Mono", monospace; }
+.f-serif { font-family: "Cinzel Decorative", Georgia, serif; }
+
+/* ---------- Fabric Sheen & Threads ---------- */
+.fabric-panel {
+  background: var(--panel-fabric);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--stitch-line);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.fabric-panel-cyan {
+  background: linear-gradient(145deg, rgba(14, 28, 48, 0.8), rgba(9, 16, 32, 0.85));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--stitch-cyan);
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.1), inset 0 0 25px rgba(0, 240, 255, 0.04);
+}
+
+.fabric-text-glow {
+  background: linear-gradient(110deg, #ffffff 0%, #b388ff 32%, #00f0ff 65%, #ffd740 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glow-orchid {
+  text-shadow: 0 0 16px rgba(179, 136, 255, 0.75), 0 0 45px rgba(179, 136, 255, 0.35);
+}
+.glow-cyan {
+  text-shadow: 0 0 14px rgba(0, 240, 255, 0.75), 0 0 40px rgba(0, 240, 255, 0.3);
+}
+.glow-gold {
+  text-shadow: 0 0 14px rgba(255, 215, 64, 0.7), 0 0 40px rgba(255, 215, 64, 0.3);
+}
+
+/* Interlaced stitched border */
+.stitch-border {
+  border: 1px dashed rgba(179, 136, 255, 0.35);
+  position: relative;
+}
+.stitch-border::before,
+.stitch-border::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--thread-cyan);
+  box-shadow: 0 0 8px var(--thread-cyan);
+}
+.stitch-border::before { top: -3px; left: -3px; }
+.stitch-border::after { bottom: -3px; right: -3px; }
+
+/* Corner tension pins / grommets */
+.grommet {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--thread-orchid);
+  background: var(--loom-void);
+  box-shadow: 0 0 8px rgba(179, 136, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.grommet::after {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--thread-cyan);
+}
+.grommet.tl { top: 8px; left: 8px; }
+.grommet.tr { top: 8px; right: 8px; }
+.grommet.bl { bottom: 8px; left: 8px; }
+.grommet.br { bottom: 8px; right: 8px; }
+
+/* Micro-weave grid background texture */
+.weave-grid-pat {
+  background-image: 
+    linear-gradient(rgba(179, 136, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Woven Node Card physics & warp-tension on hover */
+.woven-node {
+  transition: transform 0.45s cubic-bezier(0.18, 0.9, 0.3, 1), box-shadow 0.45s, border-color 0.45s;
+  position: relative;
+  overflow: hidden;
+}
+.woven-node:hover {
+  transform: translateY(-8px) scale(1.018);
+  border-color: rgba(0, 240, 255, 0.55);
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.7), 0 0 35px rgba(0, 240, 255, 0.22);
+}
+
+/* Shuttle thread flow animation */
+@keyframes shuttle-travel {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.shuttle-beam {
+  position: absolute;
+  inset-y: 0;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), rgba(179, 136, 255, 0.25), transparent);
+  animation: shuttle-travel 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+/* Morphing mesh membrane animation */
+@keyframes mesh-morph {
+  0%, 100% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; }
+  33% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  66% { border-radius: 35% 65% 58% 42% / 38% 62% 38% 62%; }
+}
+.animate-mesh-morph {
+  animation: mesh-morph 9s ease-in-out infinite;
+}
+
+/* Spool spin */
+@keyframes spool-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes spool-spin-rev {
+  to { transform: rotate(-360deg); }
+}
+.animate-spool {
+  animation: spool-spin 20s linear infinite;
+}
+.animate-spool-fast {
+  animation: spool-spin 6s linear infinite;
+}
+.animate-spool-rev {
+  animation: spool-spin-rev 14s linear infinite;
+}
+
+/* Thread vibration */
+@keyframes thread-vibe {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-2px); }
+  75% { transform: translateY(2px); }
+}
+.animate-vibe {
+  animation: thread-vibe 0.2s ease-in-out infinite;
+}
+
+/* Caret for Loom AI stream */
+.caret-loom::after {
+  content: "▊";
+  margin-left: 3px;
+  color: var(--thread-orchid);
+  animation: blink-soft 1s step-end infinite;
+}
+
+@keyframes blink-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.15; }
+}
+
+/* Organic Fabric Vignette & Fiber Sheen */
+.fabric-vignette {
+  position: fixed; inset: 0; z-index: 40; pointer-events: none;
+  background: radial-gradient(ellipse 90% 80% at 50% 45%, transparent 45%, rgba(6, 8, 18, 0.72) 100%);
+}
+
+.fabric-grain {
+  position: fixed; inset: 0; z-index: 41; pointer-events: none; opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hide-scroll::-webkit-scrollbar { display: none; }
+.hide-scroll { scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-mesh-morph, .animate-spool, .animate-spool-rev, .shuttle-beam {
+    animation: none;
+  }
+}

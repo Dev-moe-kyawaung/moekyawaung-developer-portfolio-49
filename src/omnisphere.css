@@ -1,0 +1,185 @@
+/* ============================================================
+   OMNI-SPHERE — holographic interface design system
+============================================================ */
+:root {
+  --void: #02050d;
+  --deep: #050a1a;
+  --panel: rgba(8, 20, 40, 0.55);
+  --holo: #00e5ff;
+  --holo2: #18ffff;
+  --iris: #7c4dff;
+  --magenta: #ff4081;
+  --gold: #ffd740;
+  --green: #69f0ae;
+  --ink: #e0f7ff;
+  --muted: #7fa8c9;
+  --line: rgba(0, 229, 255, 0.22);
+}
+
+html { background: var(--void); scroll-behavior: smooth; }
+body {
+  background: var(--void);
+  color: var(--ink);
+  font-family: "Rajdhani", system-ui, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+::selection { background: rgba(0,229,255,0.35); color: #fff; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--void); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--holo), var(--iris));
+  border-radius: 99px;
+}
+
+.f-orbit, .font-orbitron { font-family: "Orbitron", sans-serif; }
+.f-mono, .font-mono { font-family: "Share Tech Mono", monospace; }
+
+/* ---------- holographic panels ---------- */
+.holo-panel {
+  background: linear-gradient(155deg, rgba(10, 30, 58, 0.62), rgba(4, 10, 24, 0.72));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 70px rgba(0,0,0,0.55), inset 0 1px 0 rgba(24,255,255,0.12), 0 0 40px rgba(0,229,255,0.06);
+  position: relative;
+}
+.holo-panel::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(0,229,255,0.045) 0 1px, transparent 1px 4px);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* corner brackets */
+.holo-brackets::before, .holo-brackets::after,
+.holo-brackets > .b-bracket::before, .holo-brackets > .b-bracket::after {
+  content: "";
+  position: absolute;
+  width: 18px; height: 18px;
+  border-color: var(--holo);
+  border-style: solid;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.holo-brackets::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; border-top-left-radius: 4px; }
+.holo-brackets::after { top: -1px; right: -1px; border-width: 2px 2px 0 0; border-top-right-radius: 4px; }
+.holo-brackets > .b-bracket::before { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; border-bottom-left-radius: 4px; }
+.holo-brackets > .b-bracket::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; border-bottom-right-radius: 4px; }
+
+.holo-text {
+  background: linear-gradient(105deg, #ffffff 5%, var(--holo2) 35%, var(--holo) 55%, var(--iris) 85%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.glow-holo { text-shadow: 0 0 12px rgba(0,229,255,0.8), 0 0 40px rgba(0,229,255,0.3); }
+.glow-iris { text-shadow: 0 0 12px rgba(124,77,255,0.8), 0 0 40px rgba(124,77,255,0.3); }
+
+/* ---------- keyframes ---------- */
+@keyframes spin3d { to { transform: rotate(360deg); } }
+@keyframes spin3d-rev { to { transform: rotate(-360deg); } }
+@keyframes holo-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.55; }
+  94% { opacity: 1; }
+  97% { opacity: 0.75; }
+  98% { opacity: 1; }
+}
+@keyframes scan-y {
+  0% { transform: translateY(-120%); }
+  100% { transform: translateY(1200%); }
+}
+@keyframes beam-sweep {
+  0% { transform: translateX(-30%) rotate(18deg); opacity: 0; }
+  40% { opacity: 0.5; }
+  100% { transform: translateX(130%) rotate(18deg); opacity: 0; }
+}
+@keyframes pulse-core {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.06); opacity: 1; }
+}
+@keyframes float-node {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes blink-h { 0%,100% { opacity: 1; } 50% { opacity: 0.15; } }
+@keyframes dash-orbit { to { stroke-dashoffset: -200; } }
+@keyframes layer-in { from { opacity: 0; transform: translateZ(-120px) scale(0.92); filter: blur(8px); } to { opacity: 1; transform: translateZ(0) scale(1); filter: blur(0); } }
+
+.animate-spin3d { animation: spin3d 26s linear infinite; }
+.animate-spin3d-rev { animation: spin3d-rev 36s linear infinite; }
+.animate-flicker { animation: holo-flicker 7s linear infinite; }
+.animate-float-node { animation: float-node 6s ease-in-out infinite; }
+.animate-pulse-core { animation: pulse-core 3.5s ease-in-out infinite; }
+
+/* holo scan line inside panels */
+.holo-scan {
+  position: absolute; left: 0; right: 0; top: 0; height: 12%;
+  background: linear-gradient(180deg, transparent, rgba(0,229,255,0.12), transparent);
+  animation: scan-y 5.5s linear infinite;
+  pointer-events: none;
+}
+
+.caret-h::after { content: "▍"; margin-left: 3px; color: var(--holo); animation: blink-h 1s step-end infinite; }
+
+/* nav */
+.navlink { position: relative; }
+.navlink::after {
+  content: ""; position: absolute; left: 0; bottom: -7px; height: 1.5px; width: 100%;
+  background: linear-gradient(90deg, var(--holo), var(--iris));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease;
+}
+.navlink:hover::after, .navlink.active::after { transform: scaleX(1); }
+
+/* floating holographic node card */
+.holo-node {
+  transition: transform 0.5s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.5s, border-color 0.4s;
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+}
+.holo-node:hover {
+  transform: translateY(-8px) translateZ(30px);
+  border-color: rgba(0,229,255,0.6);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.6), 0 0 45px rgba(0,229,255,0.22);
+}
+.holo-node .node-scan {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,229,255,0.08) 48%, rgba(0,229,255,0.16) 50%, rgba(0,229,255,0.08) 52%, transparent 100%);
+  background-size: 100% 300%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.holo-node:hover .node-scan { opacity: 1; animation: scan-y 2.2s linear infinite; }
+
+/* depth stage */
+.depth-stage { perspective: 1400px; }
+
+/* volumetric beams */
+.vol-beams { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.vol-beam {
+  position: absolute; top: -30%; width: 120px; height: 160%;
+  background: linear-gradient(180deg, transparent, rgba(0,229,255,0.12), rgba(124,77,255,0.1), transparent);
+  filter: blur(18px);
+  transform: rotate(18deg);
+  animation: beam-sweep 9s ease-in-out infinite;
+}
+
+/* vignette & grain */
+.omni-vignette {
+  position: fixed; inset: 0; z-index: 40; pointer-events: none;
+  background: radial-gradient(ellipse 90% 80% at 50% 45%, transparent 45%, rgba(2,5,13,0.78) 100%);
+}
+.omni-grain {
+  position: fixed; inset: 0; z-index: 41; pointer-events: none; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hide-scroll::-webkit-scrollbar { display: none; }
+.hide-scroll { scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin3d, .animate-spin3d-rev, .holo-scan, .vol-beam, .animate-float-node { animation: none; }
+}

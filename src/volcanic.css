@@ -1,0 +1,232 @@
+/* ============================================================
+   VOLCANIC CORE TECH — Obsidian Magma Design System
+   Deep geological strata + molten magma + ember particles
+============================================================ */
+:root {
+  --obs: #050504;
+  --obs-deep: #020202;
+  --crust: #0e0c09;
+  --mantle: #1a1510;
+  --magma: #ff6b1a;
+  --magma-bright: #ff9a44;
+  --ember: #ffd166;
+  --cool-red: #ef4444;
+  --ash: #78716c;
+  --ink: #fef3e2;
+  --muted: #a89b8c;
+  --frost: #38bdf8;
+  --panel: rgba(18, 16, 12, 0.72);
+  --line: rgba(255, 107, 26, 0.18);
+  --line-glow: rgba(255, 154, 68, 0.25);
+}
+
+html { background: var(--obs); scroll-behavior: smooth; }
+body {
+  background: var(--obs);
+  color: var(--ink);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+::selection { background: rgba(255, 107, 26, 0.45); color: #fff; }
+::-webkit-scrollbar { width: 9px; }
+::-webkit-scrollbar-track { background: var(--obs); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--magma), var(--ember));
+  border-radius: 99px;
+  border: 2px solid var(--obs);
+}
+
+.f-display { font-family: "Space Grotesk", sans-serif; }
+.f-cinzel { font-family: "Cinzel Decorative", Georgia, serif; }
+.f-serif { font-family: "Instrument Serif", Georgia, serif; }
+.f-mono { font-family: "JetBrains Mono", monospace; }
+
+/* ---------- Volcanic Glass & Magma Materials ---------- */
+.volc-glass {
+  background: var(--panel);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,154,68,0.08);
+}
+.volc-deep {
+  background: linear-gradient(160deg, rgba(26,21,16,0.82), rgba(8,8,6,0.88));
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255,107,26,0.28);
+  box-shadow: 0 0 50px rgba(255,107,26,0.12), inset 0 0 30px rgba(255,107,26,0.04);
+}
+
+.magma-text {
+  background: linear-gradient(110deg, #fff5e6 0%, #ff9a44 28%, #ff6b1a 52%, #ef4444 75%, #ffd166 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.glow-magma {
+  text-shadow: 0 0 14px rgba(255,107,26,0.75), 0 0 46px rgba(255,107,26,0.3);
+}
+.glow-ember {
+  text-shadow: 0 0 14px rgba(255,209,102,0.7), 0 0 40px rgba(255,209,102,0.3);
+}
+
+/* Cracked obsidian border */
+.crack-border {
+  border: 1px solid rgba(255,107,26,0.2);
+  position: relative;
+}
+.crack-border::before,
+.crack-border::after {
+  content: "";
+  position: absolute;
+  width: 8px; height: 8px;
+  background: var(--magma);
+  box-shadow: 0 0 10px var(--magma);
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+.crack-border::before { top: -4px; left: -4px; }
+.crack-border::after { bottom: -4px; right: -4px; }
+
+/* Geological strata pattern */
+.strata {
+  background-image: repeating-linear-gradient(
+    175deg,
+    rgba(255,107,26,0.04) 0px,
+    transparent 2px,
+    transparent 18px,
+    rgba(255,107,26,0.03) 20px
+  );
+}
+
+/* ---------- Keyframe Animations ---------- */
+@keyframes lava-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes ember-float {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-60px) translateX(20px) scale(0); opacity: 0; }
+}
+@keyframes heat-shimmer {
+  0%, 100% { transform: translateY(0) scaleX(1); opacity: 0.6; }
+  25% { transform: translateY(-2px) scaleX(1.01); opacity: 0.8; }
+  75% { transform: translateY(2px) scaleX(0.99); opacity: 0.5; }
+}
+@keyframes magma-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+@keyframes caldera-spin { to { transform: rotate(360deg); } }
+@keyframes caldera-rev { to { transform: rotate(-360deg); } }
+@keyframes seismo-needle {
+  0% { transform: translateX(0); }
+  10% { transform: translateX(-8px); }
+  20% { transform: translateX(6px); }
+  30% { transform: translateX(-4px); }
+  40% { transform: translateX(2px); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(0); }
+}
+@keyframes vent-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255,107,26,0.3), 0 0 60px rgba(255,107,26,0.1); }
+  50% { box-shadow: 0 0 35px rgba(255,107,26,0.5), 0 0 80px rgba(255,107,26,0.2); }
+}
+@keyframes blink-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+@keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes eruption-reveal {
+  0% { transform: scale(0.85) translateY(20px); opacity: 0; filter: brightness(3) blur(10px); }
+  40% { filter: brightness(1.8) blur(3px); }
+  100% { transform: scale(1) translateY(0); opacity: 1; filter: brightness(1) blur(0); }
+}
+@keyframes pressure-fill {
+  0% { width: 0; }
+}
+
+.animate-lava-flow {
+  background-size: 400% 400%;
+  animation: lava-flow 8s ease-in-out infinite;
+}
+.animate-magma-pulse { animation: magma-pulse 3s ease-in-out infinite; }
+.animate-caldera-spin { animation: caldera-spin 24s linear infinite; }
+.animate-caldera-rev { animation: caldera-rev 18s linear infinite; }
+.animate-floaty { animation: floaty 6s ease-in-out infinite; }
+.animate-blink-soft { animation: blink-soft 1.5s ease-in-out infinite; }
+.animate-vent-glow { animation: vent-glow 3s ease-in-out infinite; }
+
+/* Caret */
+.caret-v::after {
+  content: "▊";
+  margin-left: 3px;
+  color: var(--magma);
+  animation: blink-soft 1s step-end infinite;
+}
+
+/* Nav underline */
+.navlink { position: relative; }
+.navlink::after {
+  content: ""; position: absolute; left: 0; bottom: -7px; height: 2px; width: 100%;
+  border-radius: 99px; background: linear-gradient(90deg, var(--magma), var(--ember));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease;
+}
+.navlink:hover::after, .navlink.active::after { transform: scaleX(1); }
+
+/* Volcanic core card */
+.volc-card {
+  transition: transform 0.45s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.45s, border-color 0.45s;
+  position: relative; overflow: hidden;
+}
+.volc-card:hover {
+  transform: translateY(-7px) scale(1.012);
+  border-color: rgba(255,107,26,0.5);
+  box-shadow: 0 20px 55px rgba(0,0,0,0.7), 0 0 40px rgba(255,107,26,0.2);
+}
+
+/* Eruption burst effect on hover */
+.volc-card .eruption-burst {
+  position: absolute; inset: 0; margin: auto; width: 80px; height: 80px;
+  border-radius: 50%; border: 2px solid rgba(255,107,26,0.6);
+  transform: scale(0); opacity: 0; pointer-events: none;
+}
+.volc-card:hover .eruption-burst {
+  animation: eruption-burst 0.9s ease-out forwards;
+}
+@keyframes eruption-burst {
+  0% { transform: scale(0.2); opacity: 0.9; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* Lava border glow on active card */
+.lava-border-active {
+  box-shadow: 0 0 0 1px var(--magma), 0 0 20px rgba(255,107,26,0.4), 0 0 60px rgba(255,107,26,0.15);
+}
+
+/* Geothermal vignette */
+.volc-vignette {
+  position: fixed; inset: 0; z-index: 40; pointer-events: none;
+  background: radial-gradient(ellipse 90% 80% at 50% 48%, transparent 42%, rgba(5,5,4,0.75) 100%);
+}
+.volc-grain {
+  position: fixed; inset: 0; z-index: 41; pointer-events: none; opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Heat shimmer overlay */
+.heat-shimmer {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+}
+.heat-shimmer::after {
+  content: "";
+  position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+  background: linear-gradient(0deg, rgba(255,107,26,0.06), transparent);
+  animation: heat-shimmer 3s ease-in-out infinite;
+}
+
+.hide-scroll::-webkit-scrollbar { display: none; }
+.hide-scroll { scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-lava-flow, .animate-magma-pulse, .animate-caldera-spin,
+  .animate-caldera-rev, .animate-floaty, .eruption-burst { animation: none; }
+}
